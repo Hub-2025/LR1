@@ -9,3 +9,33 @@ print("List:", numbers_list)
 print("Mode:", mode_value)
 print("Median:", median_value)
 print("Mean:", mean_value)
+
+
+# Prompt the user for a file name
+file_name = input("Enter file name: ")
+
+try:
+    # Open the file in read mode
+    with open(file_name, "r") as f:
+        listFile = f.read().splitlines()
+
+    selection = 1
+
+    while selection != -1:
+        print("\nThe file has", len(listFile), "lines.")
+        try:
+            selection = int(input("Enter line number (or -1 to quit): ")) - 1
+
+            if selection == -2:  # Adjust for -1 input (exit condition)
+                print("Goodbye!")
+                break
+
+            if 0 <= selection < len(listFile):
+                print("\n", listFile[selection], "\n")
+            else:
+                print("Invalid line number. Please try again.")
+        except ValueError:
+            print("Invalid input. Please enter a valid number.")
+
+except FileNotFoundError:
+    print("File not found. Please check the file name and try again.")
